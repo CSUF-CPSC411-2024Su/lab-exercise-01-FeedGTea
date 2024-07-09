@@ -5,11 +5,33 @@
 //
 
 import Foundation
-
 protocol Volunteer: ObservableObject {
     var name: String { get set }
     var age: Int { get set }
     var maxHours: Int { get }
+}
+
+class SafeWalkVolunteer: Volunteer {
+    var name: String
+    var age: Int
+        
+    init(){
+        self.name = ""
+        self.age = 0
+    }
+    init(name: String, age: Int){
+        self.name = name
+        self.age = age
+    }
+    var maxHours: Int {
+        get {
+            if (self.age < 18) {
+                return 1
+            } else {
+                return 3
+            }
+        }
+    }
 }
 
 // TODO: Create a class called SafeWalkVolunteer that implementes the Volunteer protocol.
